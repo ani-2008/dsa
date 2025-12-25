@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// for simplicity the data of linked list will be a int
+
 struct Node{
     int data;
     struct Node *next;
@@ -17,6 +19,10 @@ void traverse(struct Node *head)
     printf("NULL\n");
 }
 
+void insert(struct Node *node, int data, int pos)
+{
+    
+}
 
 int main()
 {
