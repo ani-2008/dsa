@@ -59,25 +59,47 @@ struct Node *ll_init(int data)
     }else{printf("Can't insert\n");}
 }
 
+void append(struct Node *head, int data)
+{
+    struct Node *node = head;
+    while(node->next != NULL){
+        node = node->next;
+    }
+
+    insert(node,data);
+
+}
+
 int main()
 {
     
-    struct Node *first = malloc(sizeof_Node);
-    first->data = 1;
-    first->next = NULL;
+    
     struct Node *head = ll_init(0);
-    head->next = first;
+    
+    traverse(head); // 0->NULL
 
+    append(head,1);
 
     traverse(head); // 0->1->NULL
     
-    insert(first,2); 
+    append(head,2); 
     
     traverse(head); // 0->1->2->NULL
     
-    insert(first,1);
+    insert((head->next),1);
 
     traverse(head); // 0->1->1->2->NULL
 
     free_ll(head); 
+
+    /* TODO
+     * Search value
+     * delete a node
+     * length
+     * reverse
+     * insert at some index
+     * sort
+     * insert at beginning
+    */
+
 }
