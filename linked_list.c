@@ -58,6 +58,17 @@ struct Node *ll_init(int data)
         return head;
     }else{printf("Can't insert\n");}
 }
+size_t len(struct Node *head)
+{
+    struct Node *node = head;
+    size_t length = 0;
+    while(node != NULL){
+        length++;
+        node = (node->next);
+    }
+    return length;
+
+}
 
 void append(struct Node *head, int data)
 {
@@ -67,6 +78,20 @@ void append(struct Node *head, int data)
     }
 
     insert(node,data);
+
+}
+
+size_t find(struct Node *head, int data)
+{
+    struct Node *node = head;
+    size_t index = 0;
+    while(node != NULL && node->data != data){
+        node = node->next;
+        index++;
+    }
+    if(node->data == data){
+        return index;
+    }else{return -1;}
 
 }
 
@@ -89,13 +114,16 @@ int main()
     insert((head->next),1);
 
     traverse(head); // 0->1->1->2->NULL
+    
+    printf("length %zu\n",len(head));
+    
+    printf("Index of 0 %zu\n",find(head,0));
+    printf("Index of 2 %zu\n",find(head,2));
 
     free_ll(head); 
 
     /* TODO
-     * Search value
      * delete a node
-     * length
      * reverse
      * insert at some index
      * sort
