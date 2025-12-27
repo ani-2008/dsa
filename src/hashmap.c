@@ -17,7 +17,7 @@ typedef struct{
 hash_table *init_table()
 {
     hash_table *table = malloc(sizeof(hash_table));
-    table->size = 53;
+    table->size = 64;
     table->count = 0;
     table->items = calloc(table->size,sizeof(ht_item));
     return table;
