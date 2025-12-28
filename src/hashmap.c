@@ -4,7 +4,7 @@
 // For simplicity data in Hash Table will be int(both key and value)
 
 typedef struct{
-    int key;
+    unsigned int key;
     int value;
 }ht_item;
 
@@ -17,7 +17,7 @@ typedef struct{
 hash_table *init_table()
 {
     hash_table *table = malloc(sizeof(hash_table));
-    table->size = 64;
+    table->size = 53;
     table->count = 0;
     table->items = calloc(table->size,sizeof(ht_item));
     return table;
@@ -29,6 +29,30 @@ ht_item *new_item(int k, int v)
     ht_item *item = malloc(sizeof(ht_item));
     item->key = k;
     item->value = v;
+    return item;
+}
+
+int hash_func(unsigned int k, int m)
+{
+    const int PRIME = 997;
+    k *= PRIME;
+    k = k >> 2;
+    return k % m;
+}
+
+int insert_ht(hash_table *table, ht_item *item,int hash_key)
+{
+    if((table->count) > table->size){
+        printf("ERROR: count is larger than table size\n");
+        return 1;
+    }
+    table->count++;
+    while((table->items)[hash_key] != NULL){
+        hash_key++;
+    }
+    (table->items)[hash_key] = item;
+    table->count++;
+    return 0;
 }
 
 void del_item(ht_item *i)
@@ -45,5 +69,14 @@ void del_table(hash_table *ht)
 
 int main()
 {
+    int k = 1;
+    int v = 25;
+    ht_item *item = new_item(k,v);
+    
+    hash_table *ht = init_table();
+    
+    printf("%d\n",hash_func(item->key,53));
 
+
+    del_table(ht);
 }
