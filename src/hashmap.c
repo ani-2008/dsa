@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// For simplicity data in Hash Table will be int(both key and value)
+
 
 typedef struct{
     unsigned int key;
@@ -19,7 +19,7 @@ hash_table *init_table()
     hash_table *table = malloc(sizeof(hash_table));
     table->size = 53;
     table->count = 0;
-    table->items = calloc(table->size,sizeof(ht_item));
+    table->items = calloc(table->size,sizeof(ht_item*));
     return table;
 
 }
@@ -42,7 +42,7 @@ int hash_func(unsigned int k, int m)
 
 int insert_ht(hash_table *table, ht_item *item,int hash_key)
 {
-    if((table->count) > table->size){
+    if((table->count) >= (table->size)){
         printf("ERROR: count is larger than table size\n");
         return 1;
     }
@@ -51,7 +51,7 @@ int insert_ht(hash_table *table, ht_item *item,int hash_key)
         hash_key++;
     }
     (table->items)[hash_key] = item;
-    table->count++;
+    
     return 0;
 }
 
@@ -69,13 +69,15 @@ void del_table(hash_table *ht)
 
 int main()
 {
-    int k = 1;
+    int k = 2;
     int v = 25;
     ht_item *item = new_item(k,v);
     
     hash_table *ht = init_table();
     
-    printf("%d\n",hash_func(item->key,53));
+    int hashed_key = hash_func(item->key,ht->size);
+    insert_ht(ht,item,hashed_key);
+     
 
 
     del_table(ht);
