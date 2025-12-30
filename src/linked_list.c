@@ -12,6 +12,7 @@ size_t sizeof_Node = sizeof(struct Node);
 
 void traverse(struct Node *head)
 {
+
     struct Node *node = head;
     while(node != NULL){
         printf("%d->",node->data);
@@ -85,9 +86,14 @@ size_t find(struct Node *head, int data)
 {
     struct Node *node = head;
     size_t index = 0;
-    while(node != NULL && node->data != data){
-        node = node->next;
-        index++;
+    if(node != NULL){
+        while(node != NULL && node->data != data){
+            node = node->next;
+            index++;
+        }
+    }else{
+        printf("head cannot be NULL\n");
+        return -1;
     }
     if(node->data == data){
         return index;
