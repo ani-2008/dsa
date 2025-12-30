@@ -143,4 +143,9 @@ int main()
         printf("value for the key 1 is : %d\n",search_ht(ht,key));
 
     del_table(ht);
+
+    /*
+     * resizing
+     * fix: duplicate keys
+    */
 }
