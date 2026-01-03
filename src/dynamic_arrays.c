@@ -9,7 +9,7 @@ typedef struct {
 
 void append(DynamicArray *array, int item)
 {
-    do{
+    
         if(array->count >= array->size){
             if(array->size == 0){
                 array->size = 100;
@@ -17,7 +17,7 @@ void append(DynamicArray *array, int item)
             array->items = realloc(array->items,array->size*(sizeof(array->size)));
         }
         array->items[array->count++] += item;
-    }while(0);
+    
 
 }
 
