@@ -10,13 +10,13 @@ typedef struct {
 void append(DynamicArray *array, int item)
 {
     
-        if(array->count >= array->size){
-            if(array->size == 0){
-                array->size = 100;
-            }else{array->size *= 2;}
-            array->items = realloc(array->items,array->size*(sizeof(array->size)));
-        }
-        array->items[array->count++] += item;
+    if(array->count >= array->size){
+        if(array->size == 0){
+            array->size = 100;
+        }else{array->size *= 2;}
+        array->items = realloc(array->items,array->size*(sizeof(array->size)));
+    }
+    array->items[array->count++] += item;
     
 
 }
@@ -33,4 +33,11 @@ int main()
         printf("%d ",array.items[i]);
     }
     printf("\n");
+
+    /* TODO
+     * delete from any index
+     * get size
+     * get element at any index
+     * update
+    */
 }
