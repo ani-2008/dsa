@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,6 +22,10 @@ void append(DynamicArray *array, int item)
 
 }
 
+size_t len(DynamicArray *array)
+{
+    return array->count;
+}
 int main()
 {
     DynamicArray array = {0};
@@ -32,11 +37,13 @@ int main()
     for(size_t i = 0; i < 10; i++){
         printf("%d ",array.items[i]);
     }
-    printf("\n");
-
+    printf("\n"); // 0 1 2 3 4 5 6 7 8 9
+    
+    printf("%zu\n",len(&array)); // 10
+    append(&array,10);
+    printf("%zu\n",len(&array)); // 11
     /* TODO
      * delete from any index
-     * get size
      * get element at any index
      * update
     */
