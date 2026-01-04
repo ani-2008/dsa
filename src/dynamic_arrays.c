@@ -1,4 +1,3 @@
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,10 +14,9 @@ void append(DynamicArray *array, int item)
         if(array->size == 0){
             array->size = 100;
         }else{array->size *= 2;}
-        array->items = realloc(array->items,array->size*(sizeof(array->size)));
+        array->items = realloc(array->items,array->size*(sizeof(int)));
     }
-    array->items[array->count++] += item;
-    
+    array->items[array->count++] = item; 
 
 }
 
@@ -26,6 +24,18 @@ size_t len(DynamicArray *array)
 {
     return array->count;
 }
+
+int get_ele(DynamicArray *array,size_t index)
+{
+    if(index > (array->count-1)){
+        printf("Invalid index\n");
+        return -1;
+    }else{
+        return array->items[index];
+    }
+
+}
+
 int main()
 {
     DynamicArray array = {0};
@@ -42,9 +52,11 @@ int main()
     printf("%zu\n",len(&array)); // 10
     append(&array,10);
     printf("%zu\n",len(&array)); // 11
+    printf("%d\n",get_ele(&array,10));
+    
+    free(array.items);
     /* TODO
      * delete from any index
-     * get element at any index
      * update
     */
 }
