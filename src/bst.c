@@ -15,8 +15,10 @@ struct bstNode *createNode(int val)
         newNode->val = val;
         newNode->left = NULL;
         newNode->right = NULL;
+        return newNode;
     }
-    return newNode;
+    printf("MALLOC ALLOCATION FAILED\n");
+    return NULL;
 }
 
 struct bstNode *insertNode(struct bstNode *root, int val)
@@ -47,10 +49,7 @@ void inorder(struct bstNode *root)
 
 struct bstNode *search(struct bstNode *root, int val)
 {
-    if(root == NULL){
-        return NULL;
-    }
-    while(root->val != val){
+    while(root != NULL && root->val != val){
         if(val < root->val){
             root = root->left;
         }else{
@@ -60,13 +59,13 @@ struct bstNode *search(struct bstNode *root, int val)
     return root;
 }
 
-struct bstNode *freeTree(struct bstNode *root)
+void freeTree(struct bstNode *root)
 {
     
     if(root != NULL){
-        struct bstNode *x = freeTree(root->left);
-        free(x);
-        struct bstNode *y = freeTree(root->right);
+        freeTree(root->left);
+        freeTree(root->right);
+        free(root);
     }
 }
 int main()
@@ -106,8 +105,7 @@ int main()
     printf("%p\n",x);
 
     freeTree(root);
-
-   //SEGFAULT 
+ 
     /* TODO
      * delete
      * some more methods
