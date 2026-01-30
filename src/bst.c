@@ -21,7 +21,8 @@ struct bstNode *createNode(int val)
 
 struct bstNode *insertNode(struct bstNode *root, int val)
 {
-    if(root != NULL){
+    if(root == NULL){
+        
         return createNode(val);
     }
 
@@ -44,9 +45,24 @@ void inorder(struct bstNode *root)
 
 }
 
+struct bstNode *search(struct bstNode *root, int val)
+{
+    if(root == NULL){
+        return NULL;
+    }
+    while(root->val != val){
+        if(val < root->val){
+            root = root->left;
+        }else{
+            root = root->right;
+        }
+    }
+    return root;
+}
+
 struct bstNode *freeTree(struct bstNode *root)
 {
-    //TODO
+    
     if(root != NULL){
         struct bstNode *x = freeTree(root->left);
         free(x);
@@ -69,6 +85,7 @@ int main()
     inorder(root);
     printf("\n");
     */
+
     /* TEST 1 */
     struct bstNode *root = NULL;
     root = insertNode(root,8);
@@ -78,17 +95,20 @@ int main()
     root = insertNode(root,6);
     root = insertNode(root,4);
     root = insertNode(root,7);
-    root = insertNode(root,10);
     root = insertNode(root,14);
     root = insertNode(root,13);
     root = insertNode(root,15);
     
     inorder(root);
     printf("\n");
+    
+    struct bstNode *x = search(root,6);
+    printf("%p\n",x);
+
+    freeTree(root);
+
    //SEGFAULT 
     /* TODO
-     * check insertNode
-     * search
      * delete
      * some more methods
     */
