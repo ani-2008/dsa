@@ -57,8 +57,10 @@ struct Node *ll_init(int data)
         head->data = data;
         head->next = NULL;
         return head;
-    }else{printf("Can't insert\n");}
+    }else{printf("Can't Allocate\n");return NULL;}
+
 }
+
 size_t len(struct Node *head)
 {
     struct Node *node = head;
@@ -101,6 +103,10 @@ size_t find(struct Node *head, int data)
 
 }
 
+struct Node *del(struct Node *head, struct Node *node)
+{
+    //TODO
+}
 int main()
 {
     
@@ -126,10 +132,14 @@ int main()
     printf("Index of 0 %zu\n",find(head,0));
     printf("Index of 2 %zu\n",find(head,2));
 
+    
+     // DELETING A NODE FIX
+    del(head,head); //head = 0 head->next 1
+    traverse(head); //0->1->2->NULL
+   
     free_ll(head); 
 
     /* TODO
-     * delete a node
      * reverse
      * insert at some index
      * sort
