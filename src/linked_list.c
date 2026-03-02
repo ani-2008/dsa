@@ -103,16 +103,45 @@ size_t find(struct Node *head, int data)
 
 }
 
-struct Node *del(struct Node *head, struct Node *node)
+struct Node *delNode(struct Node **head, struct Node *node)
 {
-    //TODO
+    if(head == NULL || node == NULL){
+        printf("Invalid node or head\n");
+        return NULL;
+    }else if(node == *head){
+        struct Node *temp = *head;
+        *head = (*head)->next;
+        free(temp);
+        return *head;
+    }else {
+
+        struct Node *cur = *head;
+        struct Node *prev;
+
+        struct Node *next = (node->next);
+
+        while (cur != NULL){
+            if(cur->next == node){
+                prev = cur;
+                free(cur->next);
+                
+                prev->next = next;
+                
+                return prev->next;
+            }
+            cur = cur->next;
+        }
+    
+        printf("Couldn't find the node\n");
+        return NULL;
+    }
 }
 int main()
 {
     
     
     struct Node *head = ll_init(0);
-    
+
     traverse(head); // 0->NULL
 
     append(head,1);
@@ -133,9 +162,9 @@ int main()
     printf("Index of 2 %zu\n",find(head,2));
 
     
-     // DELETING A NODE FIX
-    del(head,head); //head = 0 head->next 1
-    traverse(head); //0->1->2->NULL
+    delNode(&head,head->next);
+    delNode(&head,head->next->next); 
+    traverse(head);
    
     free_ll(head); 
 
