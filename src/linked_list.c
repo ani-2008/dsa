@@ -103,16 +103,16 @@ size_t find(struct Node *head, int data)
 
 }
 
-struct Node *delNode(struct Node **head, struct Node *node)
+void delNode(struct Node **head, struct Node *node)
 {
     if(head == NULL || node == NULL){
         printf("Invalid node or head\n");
-        return NULL;
+        
     }else if(node == *head){
         struct Node *temp = *head;
         *head = (*head)->next;
         free(temp);
-        return *head;
+        
     }else {
 
         struct Node *cur = *head;
@@ -125,15 +125,12 @@ struct Node *delNode(struct Node **head, struct Node *node)
                 prev = cur;
                 free(cur->next);
                 
-                prev->next = next;
-                
-                return prev->next;
+                prev->next = next;    
             }
             cur = cur->next;
         }
     
         printf("Couldn't find the node\n");
-        return NULL;
     }
 }
 int main()
