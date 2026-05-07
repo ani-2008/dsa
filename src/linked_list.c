@@ -130,9 +130,29 @@ void delNode(struct Node **head, struct Node *node)
             cur = cur->next;
         }
     
-        printf("Couldn't find the node\n");
     }
 }
+
+struct Node *reverse(struct Node *head)
+{ 
+
+    struct Node *prev = NULL;
+    struct Node *cur = head;
+    struct Node *next = NULL;
+
+    while (cur != NULL) {
+        next = cur->next;
+
+        cur->next = prev;
+
+        prev = cur;
+        cur = next;
+    }
+
+    return prev;
+
+}
+
 int main()
 {
     
@@ -162,11 +182,12 @@ int main()
     delNode(&head,head->next);
     delNode(&head,head->next->next); 
     traverse(head);
-   
+    struct Node *reversed_ll = reverse(head);
+    printf("reversed: ");
+    traverse(reversed_ll);
     free_ll(head); 
 
     /* TODO
-     * reverse
      * insert at some index
      * sort
      * insert at beginning
